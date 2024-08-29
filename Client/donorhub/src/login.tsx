@@ -1,12 +1,18 @@
 import React from 'react';
-import { colors } from './colors'; 
+import './credentials.css';
 
 const Login: React.FC = () => {
   return (
-    <div style={{ height: '100vh', display: 'flex',}}>
-        <div style={{ flex: 1, padding: '40px', display: 'flex', flexDirection: 'column', justifyContent: 'center', backgroundColor: colors.ourBackground }}>
-            <h1 style = {{color: colors.ourDarkBlue}}>DONNOR HUB</h1>
+    <div className="container">
+      <div className="content">
+        <h1 className="logo">DONNOR HUB</h1>
+        <div className = "data-container" >
+          <h1 className="title">Sign up...</h1>
+          <input type="text" className="text-input" placeholder='Name' />
         </div>
+      </div>
+      <div className="image-container">
+      </div>
     </div>
   );
 };
