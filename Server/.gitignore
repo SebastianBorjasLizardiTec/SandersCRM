@@ -1,0 +1,55 @@
+# Dependencias
+node_modules/
+
+# Archivos de compilación
+dist/
+build/
+
+# Archivos de log
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de entorno
+.env
+.env.test
+.env.production
+
+# Directorios de caché
+.npm
+.eslintcache
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de IDE/editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+
+# Archivos de cobertura de pruebas
+coverage/
+
+# Archivos temporales
+tmp/
+temp/
+
+# TypeScript
+*.tsbuildinfo
+
+# Archivos de configuración local
+*.local
+
+# Archivos de bloqueo de versiones (descomenta según tu preferencia)
+# package-lock.json
+# yarn.lock
+
+# Otros archivos que no deberían estar en el repositorio
+*.pem
+*.cert
+*.key
