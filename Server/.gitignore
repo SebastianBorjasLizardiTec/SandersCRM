@@ -49,6 +49,9 @@ temp/
 # package-lock.json
 # yarn.lock
 
+# Archivos específicos de MongoDB
+*.mongodb
+
 # Otros archivos que no deberían estar en el repositorio
 *.pem
 *.cert
