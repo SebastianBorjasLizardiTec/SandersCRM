@@ -23,7 +23,7 @@
   "include": [
     "src",
     "src/**/*",
-    "src/setupTests.ts"
+    "src/testing/setupTests.ts"
 
   ]
 }

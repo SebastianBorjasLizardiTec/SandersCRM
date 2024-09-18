@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './Login';
+import Login from './credentials/login';
 
 const App: React.FC = () => {
   console.log('App component rendering');

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Login from '../Login';
+import Login from '../login';
 
 describe('Login Component', () => {
 
@@ -15,4 +15,6 @@ describe('Login Component', () => {
     // Verificamos que el botón que contiene el icono está en el documento
     expect(lockIcon).toBeInTheDocument();
   });
+
+
 });
