@@ -1,16 +1,18 @@
 import './credentials.css';
 import React from 'react';
-import { CiLock } from "react-icons/ci";
-import { CiUnlock } from "react-icons/ci";
-import { useLogin } from './useLogInHook'; 
+import { CiLock, CiUnlock } from "react-icons/ci";
+import { useLogin } from './useLogInHook';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const {
     email,
     password,
     showPassword,
     isLoading,
     error,
+    isPasswordError,
     setEmail,
     setPassword,
     togglePasswordVisibility,
@@ -19,8 +21,8 @@ const Login: React.FC = () => {
 
   const onLoginClick = async () => {
     const result = await handleLogin();
-    if (result) {
-      console.log('Login successful', result);
+    if (result && result.token) {
+      navigate('/donations');
     }
   };
 
@@ -41,7 +43,7 @@ const Login: React.FC = () => {
           <div className="password-container">
             <input 
               type={showPassword ? "text" : "password"} 
-              className="password-input" 
+              className={`password-input ${isPasswordError ? 'password-error' : ''}`}
               placeholder="Password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -58,7 +60,6 @@ const Login: React.FC = () => {
           <button className='pinkButton' onClick={onLoginClick} disabled={isLoading}>
             {isLoading ? 'Logging in...' : 'Log In'}
           </button>
-          {error && <div className="error-message">{error}</div>}
           <div className='separator'>
             <div className='line'></div>
             <span className='or-text'>or</span>

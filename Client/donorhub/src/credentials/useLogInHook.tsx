@@ -7,6 +7,7 @@ interface UseLoginReturn {
   showPassword: boolean;
   isLoading: boolean;
   error: string | null;
+  isPasswordError: boolean;
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
   togglePasswordVisibility: () => void;
@@ -19,6 +20,7 @@ export const useLogin = (): UseLoginReturn => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isPasswordError, setIsPasswordError] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -27,12 +29,13 @@ export const useLogin = (): UseLoginReturn => {
   const handleLogin = async () => {
     setIsLoading(true);
     setError(null);
+    setIsPasswordError(false);
     try {
       const response = await loginUser(email, password);
-      console.log('Login successful', response);
       return response;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+      setIsPasswordError(true);
     } finally {
       setIsLoading(false);
     }
@@ -44,6 +47,7 @@ export const useLogin = (): UseLoginReturn => {
     showPassword,
     isLoading,
     error,
+    isPasswordError,
     setEmail,
     setPassword,
     togglePasswordVisibility,
