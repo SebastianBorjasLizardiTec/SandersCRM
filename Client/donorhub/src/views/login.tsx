@@ -1,7 +1,7 @@
-import './credentials.css';
+import '../styles/credentials.css';
 import React from 'react';
 import { CiLock, CiUnlock } from "react-icons/ci";
-import { useLogin } from './useLogInHook';
+import { useLogin } from '../hooks/useLogInHook';
 import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
@@ -68,7 +68,10 @@ const Login: React.FC = () => {
           <button className='signUpButton'>Sign Up</button>
         </div>
       </div>
-      <div className="image-container">
+      <div 
+        className="image-container"
+        aria-label="Background image illustrating lack of access to clean water for 12 million people"
+      >
         <div className="image-text">"12 Millones de personas no cuentan con acceso a agua potable"</div>
       </div>
     </div>

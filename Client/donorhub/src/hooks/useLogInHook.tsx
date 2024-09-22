@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { loginUser, LoginResponse } from '../Utilities/apiUtils';
+import { loginUser } from '../Utilities/authUtils';
+import { LoginResponse } from '../Utilities/apiUtils';
 
 interface UseLoginReturn {
   email: string;

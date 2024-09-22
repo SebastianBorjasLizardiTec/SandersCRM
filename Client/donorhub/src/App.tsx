@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Login from './credentials/login';
+import Login from './views/login';
 import Donations from './views/Donations';
 import { isAuthenticated } from './Utilities/authUtils';
 
