@@ -16,7 +16,7 @@ export const logout = (): void => {
 export const loginUser = async (email: string, password: string): Promise<LoginResponse> => {
 
   try {
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(`${API_URL}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export const loginUser = async (email: string, password: string): Promise<LoginR
 export const signupUser = async (nombre: string, email: string, password: string, role: 'admin' | 'user'): Promise<SignupResponse> => {
   console.log('signupUser called', { nombre, email, password, role });
   try {
-    const response = await fetch(`${API_URL}/signup`, {
+    const response = await fetch(`${API_URL}/api/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
