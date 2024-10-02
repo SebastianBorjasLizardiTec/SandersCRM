@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './views/login';
-import Donations from './views/Donations';
+import Donors from './views/Donors';
 import { isAuthenticated } from './Utilities/authUtils';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
@@ -14,7 +14,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/donations" element={<ProtectedRoute element={<Donations />} />} />
+        <Route path="/donors/*" element={<ProtectedRoute element={<Donors />} />} />
       </Routes>
     </Router>
   );
