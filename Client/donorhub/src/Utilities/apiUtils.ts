@@ -16,3 +16,4 @@ export interface SignupResponse {
   token: string;
   user: User;
 }
+
