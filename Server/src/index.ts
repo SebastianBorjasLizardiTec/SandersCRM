@@ -14,7 +14,7 @@ console.log('Starting server...');
 const app = express();
 app.use(express.json());
 app.use(cors());
-const uri = process.env.MONGODB_URI;
+const uri = "mongodb+srv://admin:4dm1n_@crm.t2lqy.mongodb.net/?";
 
 if (!uri) {
     console.error('MONGODB_URI is not defined in the environment variables');
@@ -43,8 +43,8 @@ const startServer = async () => {
 
         const PORT = process.env.PORT || 5000;
         const options = {
-            key: fs.readFileSync('/Users/sebastianborjaslizardi/Documents/CRMCRM/SandersCRM/Server/key.pem'),
-            cert: fs.readFileSync('/Users/sebastianborjaslizardi/Documents/CRMCRM/SandersCRM/Server/cert.pem')
+            key: fs.readFileSync('C:/Users/emili/Documents/GitHub/Redes2/SandersCRM/Server/key.pem'),
+            cert: fs.readFileSync('C:/Users/emili/Documents/GitHub/Redes2/SandersCRM/Server/cert.pem')
         };
 
         https.createServer(options, app).listen(PORT, () => {

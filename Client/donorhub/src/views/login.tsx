@@ -22,7 +22,7 @@ const Login: React.FC = () => {
   const onLoginClick = async () => {
     const result = await handleLogin();
     if (result && result.token) {
-      navigate('/Donors');
+      navigate('/home');
     }
   };
 
