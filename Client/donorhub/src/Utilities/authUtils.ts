@@ -70,3 +70,11 @@ export const signupUser = async (nombre: string, email: string, password: string
 export const getToken = (): string | null => {
   return localStorage.getItem('token');
 };
+
+export const registerUser = async (userData) => {
+    // registration logic
+};
+
+export const resetPassword = async (email: string) => {
+    // Implementation of password reset
+};

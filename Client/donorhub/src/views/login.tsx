@@ -11,7 +11,6 @@ const Login: React.FC = () => {
     password,
     showPassword,
     isLoading,
-    error,
     isPasswordError,
     setEmail,
     setPassword,
@@ -24,6 +23,14 @@ const Login: React.FC = () => {
     if (result && result.token) {
       navigate('/donations');
     }
+  };
+
+  const onSignUpClick = () => {
+    navigate('/SignUp'); 
+  };
+
+  const onResetPasswordClick = () => {
+    navigate('/ResetPassword'); 
   };
 
   return (
@@ -56,7 +63,9 @@ const Login: React.FC = () => {
               {showPassword ? <CiUnlock/> : <CiLock/> }
             </button>
           </div>
-          <button className='blueTextButton'>Forgot Password?</button>
+          <button className='blueTextButton' onClick={onResetPasswordClick}>
+            Forgot Password?
+          </button>
           <button className='pinkButton' onClick={onLoginClick} disabled={isLoading}>
             {isLoading ? 'Logging in...' : 'Log In'}
           </button>
@@ -65,14 +74,16 @@ const Login: React.FC = () => {
             <span className='or-text'>or</span>
             <div className='line'></div>
           </div>
-          <button className='signUpButton'>Sign Up</button>
+          <button className='signUpButton' onClick={onSignUpClick}>
+            Sign Up
+          </button>
         </div>
       </div>
       <div 
         className="image-container"
         aria-label="Background image illustrating lack of access to clean water for 12 million people"
       >
-        <div className="image-text">"12 Millones de personas no cuentan con acceso a agua potable"</div>
+        <div className="image-text">&quot;12 Millones de personas no cuentan con acceso a agua potable&quot;</div>
       </div>
     </div>
   );
