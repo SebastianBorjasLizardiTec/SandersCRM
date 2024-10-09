@@ -1,0 +1,18 @@
+.customAppBar {
+    background-color: white;
+    
+}
+
+.customMenu {
+    background-color: white; /* Cambia esto al color que prefieras */
+    height: 100%; /* Asegúrate de que ocupe toda la altura */
+    width: 100%; /* Asegúrate de que ocupe toda el área de la barra */
+    padding: 16px; /* Añade un poco de padding si es necesario */
+    box-sizing: border-box;
+}
+
+.sidebarText {
+    color: var(--our-dark-blue); /* Cambia este valor por el color que prefieras */
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 800;
+}

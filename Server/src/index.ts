@@ -13,8 +13,11 @@ console.log('Starting server...');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
-const uri = "mongodb+srv://admin:4dm1n_@crm.t2lqy.mongodb.net/?";
+const uri = "mongodb+srv://admin:4dm1n_@crm.t2lqy.mongodb.net/";
+
+app.use(cors({ // Permite que cualquier origen pueda acceder a la API
+    exposedHeaders: ['X-Total-Count'], // Expone el encabezado X-Total-Count
+})); 
 
 if (!uri) {
     console.error('MONGODB_URI is not defined in the environment variables');
