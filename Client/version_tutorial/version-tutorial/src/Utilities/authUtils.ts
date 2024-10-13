@@ -14,7 +14,6 @@ export const logout = (): void => {
 
 // Logs user in
 export const loginUser = async (email: string, password: string): Promise<LoginResponse> => {
-
   try {
     const response = await fetch(`${API_URL}/api/login`, {
       method: 'POST',
@@ -30,26 +29,33 @@ export const loginUser = async (email: string, password: string): Promise<LoginR
     }
 
     const data = await response.json();
+    console.log('Login response:', data); // Add this line
 
+    // Store the token
     localStorage.setItem('token', data.token);
 
+    // Store additional user information
+    localStorage.setItem('userRole', data.user.role);
+    localStorage.setItem('userName', data.user.nombre);
+    localStorage.setItem('userEmail', data.user.email);
+    localStorage.setItem('userId', data.user.id);
     return data;
   } catch (error) {
+    console.error('Login error:', error);
     throw error;
   }
 };
 
-export const signupUser = async (nombre: string, email: string, password: string, role: 'admin' | 'user'): Promise<SignupResponse> => {
-  console.log('signupUser called', { nombre, email, password, role });
+export const signupUser = async (nombre: string, email: string, password: string): Promise<SignupResponse> => {
+  console.log('signupUser called', { nombre, email, password });
   try {
     const response = await fetch(`${API_URL}/api/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ nombre, email, password, role }),
+      body: JSON.stringify({ nombre, email, password }),
     });
-
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -58,11 +64,23 @@ export const signupUser = async (nombre: string, email: string, password: string
     }
 
     const data = await response.json();
+    console.log('Signup response data:', data); // Log the received data
 
+    // Store the token and user information
     localStorage.setItem('token', data.token);
+    localStorage.setItem('userRole', data.user.role);
+    localStorage.setItem('userName', data.user.nombre);
+    localStorage.setItem('userEmail', data.user.email);
+
+    console.log('Stored user data:', {
+      role: localStorage.getItem('userRole'),
+      name: localStorage.getItem('userName'),
+      email: localStorage.getItem('userEmail')
+    });
 
     return data;
   } catch (error) {
+    console.error('Signup error:', error);
     throw error;
   }
 };
