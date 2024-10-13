@@ -57,7 +57,11 @@ const CustomMenu = (props: any) => {
 
   return (
     <Menu {...props} className="customMenu">
-      <Menu.Item to="donations" sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} primaryText="Donations" />
+      <Menu.DashboardItem/>
+      <Menu.Item 
+        to="donations" 
+        sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} 
+        primaryText="Donations" />
       <Menu.Item 
         to="donors" 
         sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} 
