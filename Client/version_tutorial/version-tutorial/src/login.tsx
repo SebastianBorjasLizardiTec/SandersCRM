@@ -1,7 +1,7 @@
-import '../styles/credentials.css';
+import './styles/credentials.css';
 import React from 'react';
 import { CiLock, CiUnlock } from "react-icons/ci";
-import { useLogin } from '../hooks/useLogInHook';
+import { useLogin } from './hooks/useLoginHook';
 import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {

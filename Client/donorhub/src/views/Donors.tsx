@@ -1,6 +1,6 @@
 import React from 'react';
 import { Resource, List, Datagrid, TextField, NumberField, DateField, Create, SimpleForm, TextInput, NumberInput, Edit } from 'react-admin';
-import { dataProvider } from '../providers/dataprovider';
+import { dataProvider } from '../providers/dataProvider';
 
 const DonorList = (props: any) => (
   <List {...props}>
