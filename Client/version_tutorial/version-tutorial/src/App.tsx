@@ -15,6 +15,7 @@ import Login from "./login";
 import UserProfileWidget from "./Widgets/UserProfileWidget";
 import { DonorList, DonorCreate, DonorEdit } from "./donors";
 import { DonationCreate, DonationEdit, DonationList } from "./donations";
+import { UserCreate, UserEdit, UserList } from "./users"
 
 const dataProvider = jsonServerProvider("https://localhost:5000/api");
 
@@ -48,6 +49,13 @@ export const App = () => {
               edit={isBasic ? undefined : DonationEdit} 
               show={ShowGuesser}
               create={isBasic ? undefined : DonationCreate}
+              recordRepresentation="name"
+            />
+            <Resource 
+              name="users" 
+              list={UserList} 
+              edit={isBasic ? undefined : UserEdit} 
+              show={ShowGuesser}
               recordRepresentation="name"
             />
           </Admin>

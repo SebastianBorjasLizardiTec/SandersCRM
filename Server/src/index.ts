@@ -11,6 +11,7 @@ import credentialsRoutes from './routes/credentials';
 import { ObjectId } from 'mongodb';
 import donorsRoutes from './routes/donors';
 import usersRoutes from './routes/users';
+import donationsRoutes from './routes/donations';
 
 dotenv.config();
 
@@ -205,6 +206,7 @@ const startServer = async () => {
         app.use('/api', credentialsRoutes);
         app.use('/api/donors', donorsRoutes); // Add this line
         app.use('/api/users', usersRoutes);
+        app.use('/api/donations', donationsRoutes);
 
         const PORT = process.env.PORT || 5000;
         const options = {

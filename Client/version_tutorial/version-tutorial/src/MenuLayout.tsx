@@ -61,15 +61,15 @@ const CustomMenu = (props: any) => {
       <Menu.Item 
         to="donations" 
         sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} 
-        primaryText="Donations" />
+        primaryText="Donaciones" />
       <Menu.Item 
         to="donors" 
         sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} 
-        primaryText="Donors" 
+        primaryText="Donadores" 
         state={{ userRole }}
       />
       {isAdmin && (
-        <Menu.Item to="users" sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} primaryText="Users" />
+        <Menu.Item to="users" sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} primaryText="Usuarios" />
       )}
     </Menu>
   );

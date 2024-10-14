@@ -7,18 +7,16 @@ const router = express.Router();
 
 // Schema de Donación basado en los datos del punto 2
 const donationSchema = new mongoose.Schema({
-  donorId: { type: ObjectId, required: true },  // Referencia al donante
-  fechaDonacion: { type: Date, required: true },
+  mesDonacion: { type: String, required: true },
+  nombre: { type: String, requiered: true},
+  apellido: { type: String, requiered: true},
   monto: { type: Number, required: true },
   moneda: { type: String, required: true },
   metodoPago: { type: String, required: true },
   frecuencia: { type: String, required: true }, // Única, mensual, etc.
   campana: { type: String },  // Proyecto o campaña a la que se destinó la donación
   comentarios: { type: String },  // Comentarios del donante, si los hay
-  estado: { type: String, default: 'Confirmada' },  // Confirmada, Pendiente, etc.
-  reciboEmitido: { type: Boolean, default: false },  // Si se emitió recibo
-  fechaRecibo: { type: Date },  // Fecha en que se emitió el recibo (si aplica)
-  asignacionFondos: { type: String },  // Detalle de cómo se usaron los fondos (si aplica)
+  estado: { type: String},  // Confirmada, Pendiente, etc.
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
@@ -35,8 +33,9 @@ router.get('/', async (req: Request, res: Response) => {
     
     const donationsWithId = donations.map(donation => ({
       id: donation._id,  // Transformar _id a id para React-Admin
-      donorId: donation.donorId,
-      fechaDonacion: donation.fechaDonacion,
+      nombre: donation.nombre,
+      apellido: donation.apellido,
+      mesDonacion: donation.mesDonacion,
       monto: donation.monto,
       moneda: donation.moneda,
       metodoPago: donation.metodoPago,
@@ -44,9 +43,6 @@ router.get('/', async (req: Request, res: Response) => {
       campana: donation.campaña,
       comentarios: donation.comentarios,
       estado: donation.estado,
-      reciboEmitido: donation.reciboEmitido,
-      fechaRecibo: donation.fechaRecibo,
-      asignacionFondos: donation.asignacionFondos
     }));
     
     res.set('X-Total-Count', donations.length.toString());
@@ -71,13 +67,14 @@ router.get('/:id', async (req: Request, res: Response) => {
 
     const donationWithId = {
       id: donation._id,
-      donorId: donation.donorId,
-      fechaDonacion: donation.fechaDonacion,
+      nombre: donation.nombre,
+      apellido: donation.apellido,
+      mesDonacion: donation.mesDonacion,
       monto: donation.monto,
       moneda: donation.moneda,
       metodoPago: donation.metodoPago,
       frecuencia: donation.frecuencia,
-      campana: donation.campaña,
+      campana: donation.campana,
       comentarios: donation.comentarios,
       estado: donation.estado,
       reciboEmitido: donation.reciboEmitido,
@@ -110,8 +107,10 @@ router.post('/', async (req: Request, res: Response) => {
 
     // Fetch the newly created donation document
     const createdDonation = await donationsCollection.findOne({ _id: result.insertedId });
+    
     if (createdDonation) {
-      res.status(201).json({ data: { id: createdDonation._id, ...createdDonation } });
+        const { _id, ...donationWithoutId } = createdDonation;
+      res.status(201).json({ id: _id, ...donationWithoutId } );
     } else {
       res.status(500).json({ message: 'Failed to create donation' });
     }
@@ -139,9 +138,11 @@ router.put('/:id', async (req: Request, res: Response) => {
     }
 
     const updateObj: any = {};
-    const { fechaDonacion, monto, moneda, metodoPago, frecuencia, campana, comentarios, estado, reciboEmitido, fechaRecibo, asignacionFondos } = req.body;
+    const { nombre, apellido,   mesDonacion, monto, moneda, metodoPago, frecuencia, campana, comentarios, estado, reciboEmitido, fechaRecibo, asignacionFondos } = req.body;
     
-    if (fechaDonacion) updateObj.fechaDonacion = fechaDonacion;
+    if (nombre) updateObj.nombre = nombre;
+    if (apellido) updateObj.apellido = apellido;
+    if (mesDonacion) updateObj.mesDonacion = mesDonacion;
     if (monto) updateObj.monto = monto;
     if (moneda) updateObj.moneda = moneda;
     if (metodoPago) updateObj.metodoPago = metodoPago;
@@ -149,9 +150,8 @@ router.put('/:id', async (req: Request, res: Response) => {
     if (campana) updateObj.campaña = campana;
     if (comentarios) updateObj.comentarios = comentarios;
     if (estado) updateObj.estado = estado;
-    if (reciboEmitido !== undefined) updateObj.reciboEmitido = reciboEmitido;
     if (fechaRecibo) updateObj.fechaRecibo = fechaRecibo;
-    if (asignacionFondos) updateObj.asignacionFondos = asignacionFondos;
+
 
     const result = await donationsCollection.updateOne(
       { _id: new ObjectId(donationId) },
@@ -162,7 +162,7 @@ router.put('/:id', async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'No changes made' });
     }
 
-    res.json({ data: { id: donationId, ...updateObj } });
+    res.json({  id: donationId, ...updateObj});
   } catch (error) {
     console.error('Error updating donation:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -192,7 +192,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Failed to delete donation' });
     }
 
-    res.json({ data: { id: donationId } });
+    res.json({id: donationId });
   } catch (error) {
     console.error('Error deleting donation:', error);
     res.status(500).json({ message: 'Internal server error' });
