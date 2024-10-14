@@ -84,7 +84,7 @@ router.post('/', async (req: Request, res: Response) => {
     const createdDonor = await donorsCollection.findOne({ _id: result.insertedId });
     // Respond with the newly created donor's full data
     if (createdDonor) {
-      res.status(201).json({ data: { id: createdDonor._id, ...createdDonor } });
+      res.status(201).json( {id: createdDonor._id, ...createdDonor });
     } else {
       res.status(500).json({ message: 'Failed to create donor' });
     }
@@ -134,8 +134,8 @@ router.put('/:id', async (req: Request, res: Response) => {
     }
 
     // Respond with the updated donor's ID
-    res.json({ data: { id: donorId, nombre: updateObj.nombre, apellido: updateObj.apellido, email: updateObj.email, 
-      donationsAmount: updateObj.donationsAmount, telefono: updateObj.telefono, frequency: updateObj.frequency, tier: updateObj.tier } });
+    res.json({id: donorId, nombre: updateObj.nombre, apellido: updateObj.apellido, email: updateObj.email, 
+      donationsAmount: updateObj.donationsAmount, telefono: updateObj.telefono, frequency: updateObj.frequency, tier: updateObj.tier });
   } catch (error) {
     console.error('Error updating donor:', error);
     res.status(500).json({ message: 'Internal server error' });

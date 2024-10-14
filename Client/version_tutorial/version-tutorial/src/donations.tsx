@@ -1,6 +1,7 @@
-import { List, required, SimpleList, Datagrid, TextField, DateField, EditButton, Edit, SimpleForm, TextInput, ReferenceInput, Create, FilterProps, NumberInput, SelectInput } from "react-admin";
+import { List, required, SimpleList, Datagrid, TextField, 
+    DateField, EditButton, Edit, SimpleForm, TextInput, ReferenceInput, Create, 
+    FilterProps, NumberInput, SelectInput, useNotify, useRefresh, useRedirect } from "react-admin";
 import { useMediaQuery, Theme } from "@mui/material";
-
 
 
 const handleFailure = (error: unknown) => {
@@ -16,17 +17,16 @@ export const DonationList = () => {
                 <SimpleList
                     primaryText={(record) => `Donación de ${record.monto} ${record.moneda}`}
                     secondaryText={(record) => `Método: ${record.metodoPago}`}
-                    tertiaryText={(record) => `Fecha: ${record.fechaDonacion}`}
+                    tertiaryText={(record) => `Fecha: ${record.mesDonacion}`}
                 />
             ) : (
                 <Datagrid>
                     <TextField source="id" />
-                    <TextField source="donorId" label="ID del Donante" />
-                    <DateField source="fechaDonacion" label="Fecha de Donación" />
+                    <TextField source="nombre" label="Nombre del Donador" />
+                    <TextField source="mesDonacion" label="Mes de Donación" />
                     <TextField source="monto" label="Monto" />
                     <TextField source="moneda" label="Moneda" />
                     <TextField source="metodoPago" label="Método de Pago" />
-                    <TextField source="frecuencia" label="Frecuencia" />
                     <TextField source="campana" label="Campaña" />
                     <TextField source="estado" label="Estado" />
                     <EditButton />
@@ -39,17 +39,20 @@ export const DonationList = () => {
 export const DonationEdit = () => {
     return (
         <Edit onFailure={handleFailure}>
-            <SimpleForm>
-                <TextInput source="donorId" label="ID del Donante" />
-                <DateField source="fechaDonacion" label="Fecha de Donación" />
+            <SimpleForm warnWhenUnsavedChanges>
+                <TextInput source="mesDonacion" label="Mes de Donación" />
                 <NumberInput source="monto" label="Monto" />
                 <TextInput source="moneda" label="Moneda" />
                 <SelectInput source="metodoPago" label="Método de Pago" choices={[
-                    { id: 'tarjeta', name: 'Tarjeta' },
-                    { id: 'transferencia', name: 'Transferencia' },
-                    { id: 'efectivo', name: 'Efectivo' }
+                    { id: 'Tarjeta', name: 'Tarjeta' },
+                    { id: 'Transferencia', name: 'Transferencia' },
+                    { id: 'Efectivo', name: 'Efectivo' }
                 ]} />
-                <TextInput source="frecuencia" label="Frecuencia" />
+                <SelectInput source="frecuencia" label="Frecuencia" choices={[
+                    { id: 'Unica', name: 'Única' },
+                    { id: 'Mensual', name: 'Mensual' },
+                    { id: 'Anual', name: 'Anual' }
+                ]} />
                 <TextInput source="campana" label="Campaña" />
                 <TextInput source="estado" label="Estado" />
             </SimpleForm>
@@ -60,17 +63,22 @@ export const DonationEdit = () => {
 export const DonationCreate = () => {
     return (
         <Create>
-            <SimpleForm>
-                <TextInput source="donorId" label="ID del Donante" />
-                <DateField source="fechaDonacion" label="Fecha de Donación" />
+            <SimpleForm warnWhenUnsavedChanges >
+                <TextInput source="nombre" label="Nombre del Donador" />
+                <TextInput source="apellido" label="Apellido del donador"/>
+                <TextInput source="mesDonacion" label="Mes de Donación" />
                 <NumberInput source="monto" label="Monto" />
                 <TextInput source="moneda" label="Moneda" />
                 <SelectInput source="metodoPago" label="Método de Pago" choices={[
-                    { id: 'tarjeta', name: 'Tarjeta' },
-                    { id: 'transferencia', name: 'Transferencia' },
-                    { id: 'efectivo', name: 'Efectivo' }
+                    { id: 'Tarjeta', name: 'Tarjeta' },
+                    { id: 'Transferencia', name: 'Transferencia' },
+                    { id: 'Efectivo', name: 'Efectivo' }
                 ]} />
-                <TextInput source="frecuencia" label="Frecuencia" />
+                <SelectInput source="frecuencia" label="Frecuencia" choices={[
+                    { id: 'Unica', name: 'Única' },
+                    { id: 'Mensual', name: 'Mensual' },
+                    { id: 'Anual', name: 'Anual' }
+                ]} />
                 <TextInput source="campana" label="Campaña" />
                 <TextInput source="estado" label="Estado" />
             </SimpleForm>
