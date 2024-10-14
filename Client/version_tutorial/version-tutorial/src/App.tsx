@@ -23,10 +23,9 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) 
   return isAuthenticated() ? element : <Navigate to="/login" replace />;
 };
 
-
-
 export const App = () => {
   const userRole = localStorage.getItem('userRole');
+  const isAdmin = userRole === 'admin';
   const isBasic = userRole === 'basic';
 
   return (
@@ -51,13 +50,16 @@ export const App = () => {
               create={isBasic ? undefined : DonationCreate}
               recordRepresentation="name"
             />
-            <Resource 
-              name="users" 
-              list={UserList} 
-              edit={isBasic ? undefined : UserEdit} 
-              show={ShowGuesser}
-              recordRepresentation="name"
-            />
+            {isAdmin && (
+              <Resource 
+                name="users" 
+                list={UserList} 
+                edit={UserEdit} 
+                show={ShowGuesser}
+                create={UserCreate}
+                recordRepresentation="name"
+              />
+            )}
           </Admin>
         } />} />
       </Routes>

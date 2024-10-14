@@ -14,31 +14,34 @@ const handleFailure = (error: unknown) => {
 };
 
 export const DonorList = () => {
-    const isSmall = useMediaQuery<Theme> ((theme) => theme.breakpoints.down("sm"));
+    const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
+    const userRole = localStorage.getItem('userRole');
+    const canEdit = userRole !== 'basic';
+
     return (
-        <List >
+        <List actions={canEdit ? undefined : false}>
             {isSmall ? (
                 <SimpleList
-                    primaryText = {(record) => record.nombre}
-                    secondaryText = {(record) => record.apellido}
-                    tertiaryText = {(record) => record.donationsAmount}
+                    primaryText={(record) => record.nombre}
+                    secondaryText={(record) => record.apellido}
+                    tertiaryText={(record) => record.donationsAmount}
                 />
-        ) : (
-            <Datagrid>
-                <TextField source = "id"/>
-                <TextField source = "nombre"/>
-                <TextField source = "apellido"/>
-                <EmailField source = "email"/>
-                <TextField source = "donationsAmount" label = "Cantidad donada"/>
-                <TextField source = "telefono"/>
-                <TextField source = "frequency" label = "Frecuencia"/>
-                <TextField source = "tier"/>
-                <EditButton/>           
-            </Datagrid>
-        )}
-    </List>
-);
-}
+            ) : (
+                <Datagrid bulkActionButtons={canEdit ? undefined : false}>
+                    <TextField source="id"/>
+                    <TextField source="nombre"/>
+                    <TextField source="apellido"/>
+                    <EmailField source="email"/>
+                    <TextField source="donationsAmount" label="Cantidad donada"/>
+                    <TextField source="telefono"/>
+                    <TextField source="frequency" label="Frecuencia"/>
+                    <TextField source="tier"/>
+                    {canEdit && <EditButton/>}
+                </Datagrid>
+            )}
+        </List>
+    );
+};
 
 export const DonorEdit = () => {
     return (

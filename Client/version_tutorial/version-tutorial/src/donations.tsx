@@ -11,8 +11,11 @@ const handleFailure = (error: unknown) => {
 
 export const DonationList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
+    const userRole = localStorage.getItem('userRole');
+    const canEdit = userRole !== 'basic';
+
     return (
-        <List>
+        <List actions={canEdit ? undefined : false}>
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => `Donación de ${record.monto} ${record.moneda}`}
@@ -20,7 +23,7 @@ export const DonationList = () => {
                     tertiaryText={(record) => `Fecha: ${record.mesDonacion}`}
                 />
             ) : (
-                <Datagrid>
+                <Datagrid bulkActionButtons={canEdit ? undefined : false}>
                     <TextField source="id" />
                     <TextField source="nombre" label="Nombre del Donador" />
                     <TextField source="mesDonacion" label="Mes de Donación" />
@@ -29,7 +32,7 @@ export const DonationList = () => {
                     <TextField source="metodoPago" label="Método de Pago" />
                     <TextField source="campana" label="Campaña" />
                     <TextField source="estado" label="Estado" />
-                    <EditButton />
+                    {canEdit && <EditButton />}
                 </Datagrid>
             )}
         </List>
