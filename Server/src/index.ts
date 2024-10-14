@@ -4,8 +4,11 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import https from 'https';
 import fs from 'fs';
+import path from 'path';
 import credentialsRoutes from './routes/credentials';
 import donorsRoutes from './routes/donors';
+import usersRoutes from './routes/users';
+import donationsRoutes from './routes/donations';
 
 dotenv.config();
 
@@ -13,8 +16,11 @@ console.log('Starting server...');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || "mongodb+srv://admin:4dm1n_@crm.t2lqy.mongodb.net/";
+
+app.use(cors({
+    exposedHeaders: ['X-Total-Count'],
+}));
 
 if (!uri) {
     console.error('MONGODB_URI is not defined in the environment variables');
@@ -38,13 +44,16 @@ export const connectToMongo = async () => {
 const startServer = async () => {
     try {
         await connectToMongo();
+
         app.use('/api', credentialsRoutes);
         app.use('/api/donors', donorsRoutes);
+        app.use('/api/users', usersRoutes);
+        app.use('/api/donations', donationsRoutes);
 
         const PORT = process.env.PORT || 5000;
         const options = {
-            key: fs.readFileSync('/Users/sebastianborjaslizardi/Documents/CRMCRM/SandersCRM/Server/key.pem'),
-            cert: fs.readFileSync('/Users/sebastianborjaslizardi/Documents/CRMCRM/SandersCRM/Server/cert.pem')
+            key: fs.readFileSync(path.join(__dirname, '..', 'key.pem')),
+            cert: fs.readFileSync(path.join(__dirname, '..', 'cert.pem'))
         };
 
         https.createServer(options, app).listen(PORT, () => {
