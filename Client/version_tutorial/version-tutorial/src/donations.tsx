@@ -49,7 +49,7 @@ const onSuccess = () => {
     refresh(); // Refresca la vista
 };
     return (
-        <Edit mutationOptions= {{ onSuccess }}>
+        <Edit mutationOptions= {{  }}>
             <SimpleForm >
                 <TextInput source="mesDonacion" label="Mes de Donación" />
                 <NumberInput source="monto" label="Monto" />
@@ -77,7 +77,7 @@ const notify = useNotify();
 const refresh = useRefresh();
 
 const onSuccess = () => {
-    notify('Donación actualizada correctamente'); // Mensaje de éxito
+    notify('Donación creada correctamente'); // Mensaje de éxito
     redirect('/donations'); // Redirige a la lista de donaciones
     refresh(); // Refresca la vista
 };

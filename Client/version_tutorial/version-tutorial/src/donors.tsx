@@ -24,7 +24,6 @@ export const DonorList = () => {
                     <EmailField source="email"/>
                     <TextField source="donationsAmount" label="Cantidad donada"/>
                     <TextField source="telefono"/>
-                    <TextField source="frequency" label="Frecuencia"/>
                     <TextField source="tier"/>
                     {canEdit && <EditButton/>}
                 </Datagrid>
@@ -39,12 +38,12 @@ const notify = useNotify();
 const refresh = useRefresh();
 
 const onSuccess = () => {
-    notify('Donación actualizada correctamente'); // Mensaje de éxito
-    redirect('/donations'); // Redirige a la lista de donaciones
+    notify('Donador actualizado correctamente'); // Mensaje de éxito
+    redirect('/donors'); // Redirige a la lista de donaciones
     refresh(); // Refresca la vista
 };
     return (
-    <Edit mutationOptions= {{ onSuccess }}>
+    <Edit mutationOptions= {{  }}>
         <SimpleForm>
             <TextInput source="nombre" />
             <TextInput source="apellido" />
@@ -64,8 +63,8 @@ const notify = useNotify();
 const refresh = useRefresh();
 
 const onSuccess = () => {
-    notify('Donación actualizada correctamente'); // Mensaje de éxito
-    redirect('/donations'); // Redirige a la lista de donaciones
+    notify('Donador creado correctamente'); // Mensaje de éxito
+    redirect('/donors'); // Redirige a la lista de donaciones
     refresh(); // Refresca la vista
 };
     return (
