@@ -15,7 +15,7 @@ const Dashboard = () => {
       }}
     >
       {/* Encabezado */}
-      <Typography variant="h4" sx={{ marginBottom: 2 , color: 'var(--our-dark-blue)', fontFamily: '"Nunito Sans", sans-serif' }}>
+      <Typography variant="h4" sx={{ marginBottom: 2 , color: 'var(--our-dark-blue)', fontFamily: '"Nunito Sans", sans-serif', fontWeight : 800 }}>
         Fundación Sanders
       </Typography>
       

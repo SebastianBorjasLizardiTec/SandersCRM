@@ -2,7 +2,9 @@ import { Layout as ReactAdminLayout, AppBar, Menu } from "react-admin";
 import { Typography, Button, IconButton } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { logout } from './Utilities/authUtils';
+import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import React, { useState } from 'react';
 import UserProfileWidget from './Widgets/UserProfileWidget'; // Import the new component
 import './styles/menuLayout.css'
@@ -62,15 +64,17 @@ const CustomMenu = (props: any) => {
       <Menu.Item 
         to="donations" 
         sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} 
-        primaryText="Donaciones" />
+        primaryText="Donaciones" 
+        leftIcon={<AttachMoneyIcon/>}/>
       <Menu.Item 
         to="donors" 
         sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} 
         primaryText="Donadores" 
         state={{ userRole }}
+        leftIcon={<GroupIcon/>}
       />
       {isAdmin && (
-        <Menu.Item to="users" sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} primaryText="Usuarios" />
+        <Menu.Item to="users" sx={{ color: 'var(--our-dark-blue)', fontWeight: '800' }} primaryText="Usuarios" leftIcon={<PersonIcon/>}/>
       )}
     </Menu>
   );

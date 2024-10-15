@@ -1,10 +1,6 @@
 import { List, SimpleList, Datagrid, TextField, EditButton, Edit, SimpleForm, TextInput, Create, FilterProps, useNotify, useRefresh, useRedirect } from "react-admin";
 import { useMediaQuery, Theme } from "@mui/material";
 
-const handleFailure = (error: unknown) => {
-    console.error(error); // Solo loguea el error sin notificación
-    // Aquí podrías manejar el error de otra forma
-};
 
 export const UserList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
@@ -31,9 +27,20 @@ export const UserList = () => {
 };
 
 export const UserEdit = () => {
+    
+const redirect = useRedirect();
+const notify = useNotify();
+const refresh = useRefresh();
+
+const onSuccess = () => {
+    notify('Donación actualizada correctamente'); // Mensaje de éxito
+    redirect('/donations'); // Redirige a la lista de donaciones
+    refresh(); // Refresca la vista
+};
+
     return (
-        <Edit onFailure={handleFailure}>
-            <SimpleForm warnWhenUnsavedChanges>
+        <Edit mutationOptions= {{ onSuccess }}>
+            <SimpleForm>
                 <TextInput source="nombre" label="Nombre" />
                 <TextInput source="apellido" label="Apellido" />
                 <TextInput source="email" label="Email" />
@@ -46,7 +53,7 @@ export const UserEdit = () => {
 export const UserCreate = () => {
     return (
         <Create>
-            <SimpleForm warnWhenUnsavedChanges>
+            <SimpleForm >
                 <TextInput source="nombre" label="Nombre" />
                 <TextInput source="apellido" label="Apellido" />
                 <TextInput source="email" label="Email" />

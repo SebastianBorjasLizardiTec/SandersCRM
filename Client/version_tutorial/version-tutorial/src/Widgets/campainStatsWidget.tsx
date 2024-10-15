@@ -1,7 +1,11 @@
 import { Card, CardContent, Typography, CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDataProvider } from 'react-admin';
+import { Pie } from 'react-chartjs-2'; // Importar el gráfico de pastel
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 import '../styles/statsWidgetStyles.css';
+
+Chart.register(ArcElement, Tooltip, Legend); // Registrar los elementos necesarios de Chart.js
 
 const CampaignStatsWidget = () => {
     const dataProvider = useDataProvider();
@@ -24,7 +28,7 @@ const CampaignStatsWidget = () => {
                         acc[donation.campana] = (acc[donation.campana] || 0) + 1;
                         return acc;
                     },
-                    { Agua: 0, Nutricion: 0 }
+                    { Agua: 0, Nutricion: 0, Otra: 0 }
                 );
 
                 setCampaignStats(campaignData);
@@ -42,6 +46,18 @@ const CampaignStatsWidget = () => {
     if (loading) return <CircularProgress />;
     if (error) return <Typography>{error}</Typography>;
 
+    // Preparar datos para el gráfico, asegurándose de no pasar null
+    const data = {
+        labels: Object.keys(campaignStats || {}), // Usa un objeto vacío si campaignStats es null
+        datasets: [
+            {
+                data: Object.values(campaignStats || {}), // Usa un objeto vacío si campaignStats es null
+                backgroundColor: ['#36A2EB','#FF6384', '#39f7a8'], // Colores de las secciones del gráfico
+                hoverBackgroundColor: ['#36A2EB','#FF6384', '#39f7a8'],
+            },
+        ],
+    };
+
     return (
         <Card
             className="widget" // Aplicar clase para estilos
@@ -50,18 +66,17 @@ const CampaignStatsWidget = () => {
             style={{
                 transition: 'transform 0.3s, height 0.3s',
                 transform: isHovered ? 'scale(1.05)' : 'scale(1)', // Agranda ligeramente el widget al hacer hover
-                height: isHovered ? 'auto' : '150px', // Expande la altura si está en hover
+                height: isHovered ? 'auto' : '300px', // Ajustar la altura para el gráfico
                 overflow: 'hidden',
                 position: 'relative',
             }}
         >
             <CardContent>
                 <Typography variant="h5" className="widget-title">Donaciones por Campaña</Typography>
-                {campaignStats ? (
-                    <ul className="widget-list">
-                        <li>Agua: {typeof campaignStats.Agua === 'number' ? campaignStats.Agua : 'N/A'}</li>
-                        <li>Nutricion: {typeof campaignStats.Nutricion === 'number' ? campaignStats.Nutricion : 'N/A'}</li>
-                    </ul>
+                {campaignStats && Object.keys(campaignStats).length > 0 ? (
+                    <div style={{ height: '200px' }}>
+                        <Pie data={data} />
+                    </div>
                 ) : (
                     <Typography>No hay estadísticas disponibles</Typography>
                 )}

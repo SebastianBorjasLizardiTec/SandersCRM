@@ -10,6 +10,9 @@ const TotalDonorsWidget = () => {
     const [error, setError] = useState<string | null>(null);
     const [isHovered, setIsHovered] = useState(false); // Controla el hover
 
+    // Define una cifra objetivo de donadores
+    const targetDonors = 100; // Cambia esto según tu objetivo
+
     useEffect(() => {
         const fetchStats = async () => {
             try {
@@ -34,6 +37,9 @@ const TotalDonorsWidget = () => {
     if (loading) return <CircularProgress />;
     if (error) return <Typography>{error}</Typography>;
 
+    // Calcular el porcentaje de donadores alcanzados
+    const percentageAchieved = totalDonors !== null ? ((totalDonors / targetDonors) * 100).toFixed(2) : 'N/A';
+
     return (
         <Card
             className="widget" // Aplicar clase para estilos
@@ -49,11 +55,11 @@ const TotalDonorsWidget = () => {
         >
             <CardContent>
                 <Typography variant="h5" className="widget-title">Donadores</Typography>
-                <Typography variant="h6" className="widget-value">{totalDonors !== null ? totalDonors : 'N/A'}</Typography>
+                <Typography variant="h4" className="widget-value">{totalDonors !== null ? totalDonors : 'N/A'}</Typography>
 
                 {isHovered && (
-                    <Typography variant="body2" className="widget-description">
-                        Esta es información adicional que se muestra al hacer hover.
+                    <Typography variant="h6" className="widget-description">
+                        Porcentaje de donadores alcanzados: {percentageAchieved}%
                     </Typography>
                 )}
             </CardContent>
