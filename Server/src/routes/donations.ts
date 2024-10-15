@@ -6,7 +6,7 @@ import nodemailer from 'nodemailer';
 
 const router = express.Router();
 
-// Configura el transporte del correo
+// Envío del correo
 const transporter = nodemailer.createTransport({
   host: 'sandbox.smtp.mailtrap.io',
   port: 2525,
@@ -17,13 +17,14 @@ const transporter = nodemailer.createTransport({
 });
 
 
+//HTML del correo y valores
 const sendEmail = async (donorName: string, donationAmount: string, donationDate: string, contactEmail: string, organizationName: string, year: string) => {
 
   const donation_email = `
 <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
   <div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; background-color: #f9f9f9;">
     
-    <div style="display: flex; align-items: center; padding: 10px 0; background-color: #003366; color: white;"> <!-- Cambié el color aquí -->
+    <div style="display: flex; align-items: center; padding: 10px 0; background-color: #003366; color: white;">
       <img src="https://pbs.twimg.com/profile_images/1562606977930432512/UiOSwS5F_400x400.jpg" alt="Logo" style="width: 100px; height: 100px; margin-right: 10px; margin-left: 10px;">
       <h1 style="margin-left: 30;">Confirmación de Donación</h1>
     </div>
@@ -133,7 +134,7 @@ router.get('/:id', async (req: Request, res: Response) => {
       id: donation._id,
       nombre: donation.nombre,
       apellido: donation.apellido,
-      email: donation.email,  // Agregar email
+      email: donation.email,
       mesDonacion: donation.mesDonacion,
       monto: donation.monto,
       moneda: donation.moneda,
@@ -164,14 +165,14 @@ router.post('/', async (req: Request, res: Response) => {
     const donationsCollection = db.collection('donations');
     const newDonation = new Donation(req.body);
     
-    // Insert the new donation into the collection
+    // Insertar donación
     const result = await donationsCollection.insertOne({
       ...newDonation.toObject(),
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
-    // Fetch the newly created donation document
+    // Agregar al documento
     const createdDonation = await donationsCollection.findOne({ _id: result.insertedId });
     
     if (createdDonation) {
