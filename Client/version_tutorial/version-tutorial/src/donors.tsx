@@ -58,14 +58,13 @@ export const DonorEdit = () => {
 
 export const DonorCreate = () => {
     return (
-    <Create>
+    <Create >
         <SimpleForm>
             <TextInput source="nombre" />
             <TextInput source="apellido" />
             <TextInput source="email" />
             <NumberInput source="donationsAmount" label = "Cantidad donada" />
             <TextInput source="telefono" />
-            <TextInput source="frequency" label = "Frecuencia" />
             <TextInput source="tier" />
         </SimpleForm>
     </Create>    
