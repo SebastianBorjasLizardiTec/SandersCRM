@@ -1,4 +1,4 @@
-import { List, SimpleList, Datagrid, TextField, EditButton, Edit, SimpleForm, TextInput, Create, FilterProps, useNotify, useRefresh, useRedirect } from "react-admin";
+import { List, SimpleList, Datagrid, TextField, SelectInput, EditButton, Edit, SimpleForm, TextInput, Create, FilterProps, useNotify, useRefresh, useRedirect } from "react-admin";
 import { useMediaQuery, Theme } from "@mui/material";
 
 
@@ -39,12 +39,16 @@ const onSuccess = () => {
 };
 
     return (
-        <Edit mutationOptions= {{ onSuccess }}>
+        <Edit mutationOptions= {{  }}>
             <SimpleForm>
                 <TextInput source="nombre" label="Nombre" />
                 <TextInput source="apellido" label="Apellido" />
                 <TextInput source="email" label="Email" />
-                <TextInput source="role" label="Rol" />
+                <SelectInput source="role" label="Rol" choices={[
+                    { id: 'basic', name: 'Básico' },
+                    { id: 'accountManager', name: 'Account Manager' },
+                    { id: 'admin', name: 'Admin' }
+                ]}/>
             </SimpleForm>
         </Edit>
     );
