@@ -26,6 +26,14 @@ const Login: React.FC = () => {
     }
   };
 
+  const onSignUpClick = () => {
+    navigate('/SignUp'); 
+  };
+
+  const onResetPasswordClick = () => {
+    navigate('/ResetPassword'); 
+  };
+
   return (
     <div className="container">
       <div className="content">
@@ -65,7 +73,9 @@ const Login: React.FC = () => {
             <span className='or-text'>or</span>
             <div className='line'></div>
           </div>
-          <button className='signUpButton'>Sign Up</button>
+          <button className='signUpButton' onClick = {onSignUpClick}>          
+             Sign Up
+             </button>
         </div>
       </div>
       <div 
