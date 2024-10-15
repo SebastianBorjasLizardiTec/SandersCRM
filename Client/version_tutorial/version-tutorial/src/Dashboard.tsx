@@ -2,6 +2,8 @@ import { Card, CardContent, Typography, Grid, Box } from '@mui/material';
 import TotalDonationsWidget from './Widgets/totalDonationsWidget';
 import TotalDonorsWidget from './Widgets/totalDonorsWidget';
 import CampaignStatsWidget from './Widgets/campainStatsWidget';
+import DonorsByStateWidget from './Widgets/statesStatsWidget';
+import MaxDonationsWidget from './Widgets/MaxDonationsWidget';
 import imageLogo from './assets/logo.jpeg';
 
 const Dashboard = () => {
@@ -10,32 +12,140 @@ const Dashboard = () => {
       sx={{
         padding: 3,
         display: 'flex',
-        flexDirection: 'column', // Cambia la dirección a columna
-        alignItems: 'center', // Centra el contenido horizontalmente
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: 'var(--light-background)',
+        minHeight: '100vh',
+        overflowX: 'hidden',
       }}
     >
-      {/* Encabezado */}
-      <Typography variant="h4" sx={{ marginBottom: 2 , color: 'var(--our-dark-blue)', fontFamily: '"Nunito Sans", sans-serif', fontWeight : 800 }}>
-        Fundación Sanders
-      </Typography>
-      
-      {/* Imagen en la parte superior */}
-      <img 
-        src={imageLogo} 
-        alt="Logo de la fundación Sanders" 
-        style={{ width: '25%', height: 'auto', maxWidth: '800px', marginBottom: '20px' }} // Ajusta el tamaño y el margen
-      />
-      
-      {/* Cuadrícula para los widgets */}
-      <Grid container spacing={3}>
+      <Box 
+        sx={{
+          backgroundColor: 'var(--our-dark-blue)',
+          borderRadius: 2,
+          padding: 2,
+          boxShadow: 2,
+          textAlign: 'left', 
+          width: '100%', 
+          margin: 0,
+          marginBottom: 3,
+        }}
+      >
+        <Typography 
+          variant="h3"
+          sx={{ 
+            color: 'White', 
+            fontFamily: '"Nunito Sans", sans-serif', 
+            fontWeight: 800,
+            marginBottom: 1,
+          }}
+        >
+          Fundación Sanders
+        </Typography>
+        
+        <Box sx={{ display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+          <img 
+            src={imageLogo} 
+            alt="Logo de la fundación Sanders" 
+            style={{ 
+              width: 'auto',  
+              height: '100%', 
+              maxHeight: '180px', 
+              marginRight: '10px', 
+            }}
+          />
+          <img 
+            src="https://conecta.tec.mx/sites/default/files/inline-images/jenny-salomon-fundacion-sanders-poyecto-techo-hidalgo-2.jpg" 
+            alt="Descripción de la primera imagen"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              maxHeight: '180px', 
+              marginRight: '10px',
+            }}
+          />
+          <img 
+            src="https://conecta.tec.mx/sites/default/files/styles/header_full/public/2024-07/jenny-salomon-en-comunidad-hidalguense-portada-conecta.jpg.webp?itok=pCXX0g0-" 
+            alt="Descripción de la segunda imagen"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+              maxHeight: '180px', 
+              marginRight: '10px', 
+            }}
+          />
+          <img 
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCtB_5iVecF_sRyHwu1UiMwodefio-Dn7-sw&s" 
+            alt="Descripción de la tercera imagen"
+            style={{
+              maxWidth: '100%', 
+              height: 'auto', 
+              maxHeight: '180px', 
+            }}
+          />
+        </Box>
+      </Box>
+
+      <Grid container spacing={3} justifyContent="center">
         <Grid item xs={12} sm={6} md={4}>
-          <TotalDonorsWidget />
+          <Card sx={{ 
+            boxShadow: 1, 
+            borderRadius: 2,
+            backgroundColor: '#f0f0f0',
+          }}>
+            <CardContent>
+              <TotalDonorsWidget />
+            </CardContent>
+          </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <TotalDonationsWidget />
+          <Card sx={{ 
+            boxShadow: 1, 
+            borderRadius: 2,
+            backgroundColor: '#f0f0f0',
+          }}>
+            <CardContent>
+              <TotalDonationsWidget />
+            </CardContent>
+          </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <CampaignStatsWidget />
+          <Card sx={{ 
+            boxShadow: 1, 
+            borderRadius: 2,
+            backgroundColor: '#f0f0f0',
+          }}>
+            <CardContent>
+              <CampaignStatsWidget />
+            </CardContent>
+          </Card>
+        </Grid>
+      
+        <Grid item xs={12}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Card sx={{ 
+                boxShadow: 1, 
+                borderRadius: 2,
+                backgroundColor: '#f0f0f0', 
+              }}>
+                <CardContent>
+                  <DonorsByStateWidget />
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Card sx={{ 
+                boxShadow: 1, 
+                borderRadius: 2,
+                backgroundColor: '#f0f0f0',
+              }}>
+                <CardContent>
+                  <MaxDonationsWidget />
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Box>

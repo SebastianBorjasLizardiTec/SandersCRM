@@ -27,7 +27,7 @@ export const DonationList = () => {
                 <SimpleList
                     primaryText={(record) => `Donación de ${record.monto} ${record.moneda}`}
                     secondaryText={(record) => `Método: ${record.metodoPago}`}
-                    tertiaryText={(record) => `Fecha: ${record.fechaDonacion}`} // Cambia a 'fechaDonacion' si existe
+                    tertiaryText={(record) => `Fecha: ${record.fechaDonacion}`}
                 />
             ) : (
                 <Datagrid bulkActionButtons={canEdit ? undefined : false}>
@@ -70,7 +70,7 @@ export const DonationEdit = () => {
                         { id: 'MX', name: 'Pesos Mexicanos (MX)' },
                         { id: 'USD', name: 'Dólares Estadounidenses (USD)' }
                     ]}
-                    defaultValue="MX" // Valor predeterminado
+                    defaultValue="MX"
                     validate={required()}
                 />
                 <SelectInput source="metodoPago" label="Método de Pago" choices={[
