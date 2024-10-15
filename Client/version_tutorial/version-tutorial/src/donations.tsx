@@ -1,13 +1,11 @@
 import { List, required, SimpleList, Datagrid, TextField, 
     DateField, EditButton, Edit, SimpleForm, TextInput, ReferenceInput, Create, 
-    FilterProps, NumberInput, SelectInput, useNotify, useRefresh, useRedirect } from "react-admin";
+    FilterProps, NumberInput, SelectInput, useNotify, useRefresh, useRedirect, TopToolbar, CreateButton } from "react-admin";
 import { useMediaQuery, Theme } from "@mui/material";
 
 
-const handleFailure = (error: unknown) => {
-    console.error(error); // Solo loguea el error sin notificación
-    // Aquí podrías manejar el error de otra forma
-};
+
+
 
 export const DonationList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
@@ -16,6 +14,7 @@ export const DonationList = () => {
 
     return (
         <List actions={canEdit ? undefined : false}>
+            
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => `Donación de ${record.monto} ${record.moneda}`}
@@ -40,9 +39,18 @@ export const DonationList = () => {
 };
 
 export const DonationEdit = () => {
+    const redirect = useRedirect();
+const notify = useNotify();
+const refresh = useRefresh();
+
+const onSuccess = () => {
+    notify('Donación actualizada correctamente'); // Mensaje de éxito
+    redirect('/donations'); // Redirige a la lista de donaciones
+    refresh(); // Refresca la vista
+};
     return (
-        <Edit onFailure={handleFailure}>
-            <SimpleForm warnWhenUnsavedChanges>
+        <Edit mutationOptions= {{ onSuccess }}>
+            <SimpleForm >
                 <TextInput source="mesDonacion" label="Mes de Donación" />
                 <NumberInput source="monto" label="Monto" />
                 <TextInput source="moneda" label="Moneda" />
@@ -64,9 +72,18 @@ export const DonationEdit = () => {
 };
 
 export const DonationCreate = () => {
+    const redirect = useRedirect();
+const notify = useNotify();
+const refresh = useRefresh();
+
+const onSuccess = () => {
+    notify('Donación actualizada correctamente'); // Mensaje de éxito
+    redirect('/donations'); // Redirige a la lista de donaciones
+    refresh(); // Refresca la vista
+};
     return (
-        <Create>
-            <SimpleForm warnWhenUnsavedChanges >
+        <Create mutationOptions= {{ onSuccess }}>
+            <SimpleForm  >
                 <TextInput source="nombre" label="Nombre del Donador" />
                 <TextInput source="apellido" label="Apellido del donador"/>
                 <TextInput source="mesDonacion" label="Mes de Donación" />

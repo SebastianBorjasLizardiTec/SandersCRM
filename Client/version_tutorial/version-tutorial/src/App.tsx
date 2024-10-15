@@ -19,6 +19,7 @@ import { UserCreate, UserEdit, UserList } from "./users"
 import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { i18nProvider } from "./i18nProvider";
 
 const dataProvider = jsonServerProvider("https://localhost:5000/api");
 
@@ -36,7 +37,7 @@ export const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/*" element={<ProtectedRoute element={
-          <Admin darkTheme={null} layout={menuLayout} dashboard={Dashboard} dataProvider={dataProvider}>
+          <Admin darkTheme={null} layout={menuLayout} dashboard={Dashboard} dataProvider={dataProvider} i18nProvider={i18nProvider}>
             <Resource 
               name="donors" 
               list={DonorList} 
@@ -44,7 +45,7 @@ export const App = () => {
               show={ShowGuesser}
               create={isBasic ? undefined : DonorCreate}
               recordRepresentation="name"
-              icon={PersonIcon}
+              icon={GroupIcon}
             />
             <Resource 
               name="donations" 
@@ -56,14 +57,6 @@ export const App = () => {
               icon={AttachMoneyIcon}
             />
 
-            <Resource 
-              name="users" 
-              list={UserList} 
-              edit={isBasic ? undefined : UserEdit} 
-              show={ShowGuesser}
-              recordRepresentation="name"
-              icon = {GroupIcon}
-            />
 
             {isAdmin && (
               <Resource 
@@ -71,8 +64,8 @@ export const App = () => {
                 list={UserList} 
                 edit={UserEdit} 
                 show={ShowGuesser}
-                create={UserCreate}
                 recordRepresentation="name"
+                icon = {PersonIcon}
               />
             )}
 

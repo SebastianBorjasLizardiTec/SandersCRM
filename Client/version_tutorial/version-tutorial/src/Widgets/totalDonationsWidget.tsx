@@ -1,12 +1,18 @@
 import { Card, CardContent, Typography, CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDataProvider } from 'react-admin';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from 'recharts'; // Importa componentes de Recharts
 import '../styles/statsWidgetStyles.css';
+
+// Define un tipo para los datos de las donaciones
+interface DonationData {
+    frecuencia: string;
+    cantidad: number;
+}
 
 const TotalDonationsWidget = () => {
     const dataProvider = useDataProvider();
-    const [totalDonations, setTotalDonations] = useState<number | null>(null);
-    const [totalAmount, setTotalAmount] = useState<number | null>(null);
+    const [donationData, setDonationData] = useState<DonationData[]>([]); // Inicializa el estado con el tipo correcto
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isHovered, setIsHovered] = useState(false); // Controla el hover
@@ -20,10 +26,20 @@ const TotalDonationsWidget = () => {
                     filter: {},
                 });
 
-                setTotalDonations(donationsResponse.total ?? 0);
-                setTotalAmount(
-                    donationsResponse.data.reduce((acc, donation) => acc + donation.monto, 0)
-                );
+                // Agrupa donaciones por frecuencia
+                const groupedData = donationsResponse.data.reduce((acc: Record<string, number>, donation) => {
+                    const frequency = donation.frecuencia; // Suponiendo que el tipo de frecuencia está en 'frecuencia'
+                    acc[frequency] = (acc[frequency] || 0) + 1;
+                    return acc;
+                }, {});
+
+                // Convierte a un array para Recharts
+                const formattedData: DonationData[] = Object.keys(groupedData).map(key => ({
+                    frecuencia: key,
+                    cantidad: groupedData[key],
+                }));
+
+                setDonationData(formattedData);
             } catch (error) {
                 console.error('Error fetching total donations:', error);
                 setError('Error al cargar las donaciones');
@@ -46,20 +62,28 @@ const TotalDonationsWidget = () => {
             style={{
                 transition: 'transform 0.3s, height 0.3s',
                 transform: isHovered ? 'scale(1.05)' : 'scale(1)', // Agranda ligeramente el widget al hacer hover
-                height: isHovered ? 'auto' : '150px', // Expande la altura si está en hover
+                height: isHovered ? 'auto' : '300px', // Aumenta la altura para la gráfica
                 overflow: 'hidden',
                 position: 'relative',
             }}
         >
             <CardContent>
-                <Typography variant="h5" className="widget-title">Donaciones</Typography>
-                <Typography variant="h6" className="widget-value">{totalDonations !== null ? totalDonations : 'N/A'}</Typography>
+                <Typography variant="h5" className="widget-title">Donaciones por Frecuencia</Typography>
 
-                {isHovered && (
-                    <Typography variant="h6" className="widget-description">
-                        Monto Total Recaudado: ${totalAmount !== null ? totalAmount : 'N/A'}
-                    </Typography>
-                )}
+                {/* Gráfica de barras */}
+                <BarChart
+                    width={300} // Ajusta el tamaño según tus necesidades
+                    height={200}
+                    data={donationData}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="frecuencia" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="cantidad" fill="#deae3e" />
+                </BarChart>
             </CardContent>
         </Card>
     );
