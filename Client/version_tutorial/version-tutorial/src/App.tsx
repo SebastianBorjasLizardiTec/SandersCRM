@@ -16,6 +16,9 @@ import UserProfileWidget from "./Widgets/UserProfileWidget";
 import { DonorList, DonorCreate, DonorEdit } from "./donors";
 import { DonationCreate, DonationEdit, DonationList } from "./donations";
 import { UserCreate, UserEdit, UserList } from "./users"
+import GroupIcon from '@mui/icons-material/Group';
+import PersonIcon from '@mui/icons-material/Person';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const dataProvider = jsonServerProvider("https://localhost:5000/api");
 
@@ -41,6 +44,7 @@ export const App = () => {
               show={ShowGuesser}
               create={isBasic ? undefined : DonorCreate}
               recordRepresentation="name"
+              icon={PersonIcon}
             />
             <Resource 
               name="donations" 
@@ -49,7 +53,18 @@ export const App = () => {
               show={ShowGuesser}
               create={isBasic ? undefined : DonationCreate}
               recordRepresentation="name"
+              icon={AttachMoneyIcon}
             />
+
+            <Resource 
+              name="users" 
+              list={UserList} 
+              edit={isBasic ? undefined : UserEdit} 
+              show={ShowGuesser}
+              recordRepresentation="name"
+              icon = {GroupIcon}
+            />
+
             {isAdmin && (
               <Resource 
                 name="users" 
@@ -60,6 +75,7 @@ export const App = () => {
                 recordRepresentation="name"
               />
             )}
+
           </Admin>
         } />} />
       </Routes>
