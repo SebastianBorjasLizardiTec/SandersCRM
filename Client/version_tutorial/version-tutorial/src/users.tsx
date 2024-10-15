@@ -1,11 +1,12 @@
-import { List, SimpleList, Datagrid, TextField, SelectInput, EditButton, Edit, SimpleForm, TextInput, Create, FilterProps, useNotify, useRefresh, useRedirect } from "react-admin";
+import { List, SimpleList, Datagrid, TextField, SelectInput, EditButton, Edit, SimpleForm, TextInput, Create, useNotify, useRefresh, useRedirect } from "react-admin";
 import { useMediaQuery, Theme } from "@mui/material";
-
 
 export const UserList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
+    const canEdit = true; // Define el valor de canEdit según tu lógica
+
     return (
-        <List>
+        <List actions={canEdit ? undefined : false} sx={{ backgroundColor: '#ff7c39' }}>
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => `${record.nombre} ${record.apellido}`}
@@ -25,6 +26,7 @@ export const UserList = () => {
         </List>
     );
 };
+
 
 export const UserEdit = () => {
     
