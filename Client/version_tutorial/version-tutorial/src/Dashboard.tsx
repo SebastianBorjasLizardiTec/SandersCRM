@@ -14,7 +14,7 @@ const Dashboard = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'var(--light-background)',
+        backgroundColor: 'var(--grey-background)',
         minHeight: '100vh',
         overflowX: 'hidden',
       }}

@@ -22,7 +22,7 @@ export const DonationList = () => {
     const canEdit = userRole !== 'basic';
 
     return (
-        <List actions={canEdit ? undefined : false}>
+        <List actions={canEdit ? undefined : false} sx={{ backgroundColor: '#ff7c39' }}>
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => `Donación de ${record.monto} ${record.moneda}`}
