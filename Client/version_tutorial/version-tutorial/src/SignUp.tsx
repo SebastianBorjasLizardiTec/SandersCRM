@@ -38,12 +38,12 @@ const SignUp: React.FC = () => {
       <div className="content">
         <h1 className="logo">DONNOR HUB</h1>
         <div className="data-container">
-          <h1 className="title">Create Account</h1>
-          <div className="greyText">Please enter your details to sign up...</div>
+          <h1 className="title">Crear cuenta</h1>
+          <div className="greyText">Por favor, ingresa tus detalles para crear una cuenta...</div>
           <input 
             type="text" 
             className="email-input" 
-            placeholder="Username" 
+            placeholder="Nombre" 
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
           />
@@ -58,7 +58,7 @@ const SignUp: React.FC = () => {
             <input 
               type={showPassword ? "text" : "password"} 
               className="password-input"
-              placeholder="Password" 
+              placeholder="Contraseña" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -74,7 +74,7 @@ const SignUp: React.FC = () => {
             <input 
               type={showPassword ? "text" : "password"} 
               className="password-input"
-              placeholder="Confirm Password" 
+              placeholder="Confirmar contraseña" 
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
@@ -89,11 +89,11 @@ const SignUp: React.FC = () => {
            
           </div>
           <button className='pinkButton' onClick={onSignUpClick} disabled={isLoading}>
-            {isLoading ? 'Signing up...' : 'Sign Up'}
+            {isLoading ? 'Registrando' : 'Registrarse'}
           </button>
           <div className='separator'>
             <div className='line'></div>
-            <span className='or-text'>or</span>
+            <span className='or-text'>o</span>
             <div className='line'></div>
           </div>
           <button className='blueTextButton' onClick={onLogInClick}>
