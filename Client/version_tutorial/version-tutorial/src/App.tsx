@@ -21,7 +21,6 @@ import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { i18nProvider } from "./i18nProvider";
-import { ThemeProvider } from '@mui/material/styles';
 
 const dataProvider = jsonServerProvider("https://localhost:5000/api");
 

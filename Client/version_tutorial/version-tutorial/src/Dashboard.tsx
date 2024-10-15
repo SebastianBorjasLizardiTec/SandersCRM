@@ -2,8 +2,6 @@ import { Card, CardContent, Typography, Grid, Box } from '@mui/material';
 import TotalDonationsWidget from './Widgets/totalDonationsWidget';
 import TotalDonorsWidget from './Widgets/totalDonorsWidget';
 import CampaignStatsWidget from './Widgets/campainStatsWidget';
-import DonorsByStateWidget from './Widgets/statesStatsWidget';
-import MaxDonationsWidget from './Widgets/MaxDonationsWidget';
 import imageLogo from './assets/logo.jpeg';
 
 const Dashboard = () => {
@@ -119,33 +117,6 @@ const Dashboard = () => {
               <CampaignStatsWidget />
             </CardContent>
           </Card>
-        </Grid>
-      
-        <Grid item xs={12}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <Card sx={{ 
-                boxShadow: 1, 
-                borderRadius: 2,
-                backgroundColor: '#f0f0f0', 
-              }}>
-                <CardContent>
-                  <DonorsByStateWidget />
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Card sx={{ 
-                boxShadow: 1, 
-                borderRadius: 2,
-                backgroundColor: '#f0f0f0',
-              }}>
-                <CardContent>
-                  <MaxDonationsWidget />
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
         </Grid>
       </Grid>
     </Box>
