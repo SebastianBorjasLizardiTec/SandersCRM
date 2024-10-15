@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { connectToMongo } from '../index';
+import { ObjectId } from 'mongodb';
 
 const router = express.Router();
 
@@ -42,7 +43,8 @@ router.post('/login', async (req: Request, res: Response) => {
             user: { 
                 id: user._id,
                 nombre: user.nombre, 
-                email: user.email 
+                email: user.email,
+                role: user.role // Include the user's role
             } 
         });
     } catch (error) {
@@ -56,7 +58,7 @@ router.post('/signup', async (req: Request, res: Response) => {
     let db;
     try {
         db = await connectToMongo();
-        const { nombre, email, password } = req.body;
+        const { nombre, email, password, role } = req.body;
         const usersCollection = db.collection('users');
 
         const existingUser = await usersCollection.findOne({ email });
@@ -71,7 +73,10 @@ router.post('/signup', async (req: Request, res: Response) => {
             nombre,
             email,
             password: hashedPassword,
+            role: role || "Basic" // Set role to "Basic" only if not specified
         };
+
+        console.log('New user data:', newUser);
 
         const result = await usersCollection.insertOne(newUser);
 
@@ -81,16 +86,19 @@ router.post('/signup', async (req: Request, res: Response) => {
             { expiresIn: '1h' }
         );
 
-        console.log('Signup successful:', email);
-        res.status(201).json({
+        const responseData = {
             message: 'User created successfully',
             token,
             user: {
                 id: result.insertedId,
                 nombre,
                 email,
+                role: newUser.role
             },
-        });
+        };
+
+        console.log('Signup successful. Response data:', responseData);
+        res.status(201).json(responseData);
     } catch (error) {
         console.error('Signup error:', error);
         res.status(500).json({ message: 'Internal server error' });
