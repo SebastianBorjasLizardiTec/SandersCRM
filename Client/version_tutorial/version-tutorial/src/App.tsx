@@ -12,6 +12,7 @@ import jsonServerProvider from "ra-data-json-server";
 import { isAuthenticated } from "./Utilities/authUtils";
 import Dashboard from "./Dashboard";
 import Login from "./login";
+import SignUp from "./SignUp";
 import UserProfileWidget from "./Widgets/UserProfileWidget";
 import { DonorList, DonorCreate, DonorEdit } from "./donors";
 import { DonationCreate, DonationEdit, DonationList } from "./donations";
@@ -36,6 +37,7 @@ export const App = () => {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/SignUp" element = {<SignUp/>}/>
         <Route path="/*" element={<ProtectedRoute element={
           <Admin darkTheme={null} layout={menuLayout} dashboard={Dashboard} dataProvider={dataProvider} i18nProvider={i18nProvider}>
             <Resource 
