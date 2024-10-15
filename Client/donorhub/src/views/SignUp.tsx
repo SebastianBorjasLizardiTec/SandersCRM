@@ -21,8 +21,6 @@ const SignUp: React.FC = () => {
     handleSignUp,
   } = useSignUp();
 
- 
-
   const onSignUpClick = async () => {
     const result = await handleSignUp();
     if (result && result.success) { 
@@ -63,7 +61,15 @@ const SignUp: React.FC = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div className='password-container'>
+             <button 
+              className="toggle-password"
+              onClick={togglePasswordVisibility}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? <CiUnlock/> : <CiLock/> }
+            </button>
+            </div>
+          <div className="password-container">  
             <input 
               type={showPassword ? "text" : "password"} 
               className="password-input"
@@ -71,14 +77,15 @@ const SignUp: React.FC = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            </div>
-            <button 
+             <button 
               className="toggle-password"
               onClick={togglePasswordVisibility}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <CiUnlock/> : <CiLock/> }
             </button>
+            </div>
+           
           </div>
           <button className='pinkButton' onClick={onSignUpClick} disabled={isLoading}>
             {isLoading ? 'Signing up...' : 'Sign Up'}
@@ -93,7 +100,6 @@ const SignUp: React.FC = () => {
           </button>
         </div>
       </div>
-    </div>
   );
 };
 

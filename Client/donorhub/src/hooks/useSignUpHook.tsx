@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { registerUser } from '../Utilities/authUtils'; // Asume que tienes una función para registrar usuarios
-import { RegisterResponse } from '../Utilities/apiUtils'; // Asume que tienes un tipo para la respuesta de registro
+import { registerUser } from '../Utilities/authUtils'; 
+
+// import { RegisterResponse } from '../Utilities/apiUtils'; 
 
 interface UseSignUpReturn {
   username: string;
