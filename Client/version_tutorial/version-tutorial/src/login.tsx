@@ -39,8 +39,8 @@ const Login: React.FC = () => {
       <div className="content">
         <h1 className="logo">DONNOR HUB</h1>
         <div className="data-container">
-          <h1 className="title">Welcome back!</h1>
-          <div className="greyText">Please enter your details...</div>
+          <h1 className="title">¡Bienvenido de vuelta!</h1>
+          <div className="greyText">Por favor, ingresa tu información...</div>
           <input 
             type="text" 
             className="email-input" 
@@ -52,7 +52,7 @@ const Login: React.FC = () => {
             <input 
               type={showPassword ? "text" : "password"} 
               className={`password-input ${isPasswordError ? 'password-error' : ''}`}
-              placeholder="Password" 
+              placeholder="Contraseña" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -64,17 +64,16 @@ const Login: React.FC = () => {
               {showPassword ? <CiUnlock/> : <CiLock/> }
             </button>
           </div>
-          <button className='blueTextButton'>Forgot Password?</button>
           <button className='pinkButton' onClick={onLoginClick} disabled={isLoading}>
             {isLoading ? 'Logging in...' : 'Log In'}
           </button>
           <div className='separator'>
             <div className='line'></div>
-            <span className='or-text'>or</span>
+            <span className='or-text'>o</span>
             <div className='line'></div>
           </div>
           <button className='signUpButton' onClick = {onSignUpClick}>          
-             Sign Up
+             Registrarse
              </button>
         </div>
       </div>
