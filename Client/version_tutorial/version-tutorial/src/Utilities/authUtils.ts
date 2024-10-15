@@ -85,6 +85,50 @@ export const signupUser = async (nombre: string, email: string, password: string
   }
 };
 
+
 export const getToken = (): string | null => {
   return localStorage.getItem('token');
+};
+
+interface RegisterUserData {
+  nombre: string;
+  email: string;
+  password: string;
+  // Add other fields if necessary
+}
+
+export interface RegisterResponse {
+  token: string;
+  user: {
+    role: string;
+    nombre: string;
+    email: string;
+    id: string;
+  };
+}
+
+
+
+    
+
+export const resetPassword = async (email: string): Promise<void> => {
+    try {
+        const response = await fetch(`${API_URL}/api/reset-password`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'An error occurred during password reset');
+        }
+
+        console.log('Password reset email sent successfully');
+    } catch (error) {
+        console.error('Password reset error:', error);
+        throw error;
+    }
 };
