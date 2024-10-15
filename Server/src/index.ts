@@ -1,4 +1,5 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import { Request, Response } from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -145,12 +146,12 @@ app.post('/signup', async (req: Request, res: Response) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 const options = {
-    key: fs.readFileSync('/Users/sebastianborjaslizardi/Documents/CRMCRM/SandersCRM/Server/key.pem'),
-    cert: fs.readFileSync('/Users/sebastianborjaslizardi/Documents/CRMCRM/SandersCRM/Server/cert.pem')
+    key: fs.readFileSync('/Users/felipedearaujobarbosa/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Tec/reto_redes/SandersCRM/Server/key.pem'),
+    cert: fs.readFileSync('/Users/felipedearaujobarbosa/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Tec/reto_redes/SandersCRM/Server/cert.pem')
 };
 
-https.createServer(options, app).listen(5000, () => {
+https.createServer(options, app).listen(5001, () => {
     console.log(`Server is running on https://localhost:${PORT}`);
 });

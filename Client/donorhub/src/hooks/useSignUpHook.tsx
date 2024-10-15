@@ -45,7 +45,7 @@ export const useSignUp = (): UseSignUpReturn => {
     setError(null);
     setIsPasswordError(false);
     try {
-      const response = await registerUser(username, email, password);
+      const response = await registerUser({ username, email, password });
       return response;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
