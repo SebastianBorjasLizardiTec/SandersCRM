@@ -1,17 +1,7 @@
-import {List, required, SimpleList, Datagrid, TextField, EmailField, Filter, EditButton, Edit, SimpleForm, TextInput, ReferenceInput, Create, FilterProps, ReferenceField, NumberInput} from "react-admin";
+import {List, required, SimpleList, Datagrid, TextField, EmailField, Filter, EditButton, Edit, SimpleForm, TextInput, ReferenceInput, Create, FilterProps, ReferenceField, NumberInput, useRedirect, useNotify, useRefresh} from "react-admin";
 import {useMediaQuery, Theme} from "@mui/material";
 
 
-const UserFilter = (props: FilterProps) => (
-    <Filter {...props}>
-        <TextInput label="Search by name" source="name" alwaysOn />
-    </Filter>
-);
-
-const handleFailure = (error: unknown) => {
-    console.error(error); // Solo loguea el error sin notificación
-    // Aquí podrías manejar el error de otra forma
-};
 
 export const DonorList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
@@ -44,8 +34,17 @@ export const DonorList = () => {
 };
 
 export const DonorEdit = () => {
+    const redirect = useRedirect();
+const notify = useNotify();
+const refresh = useRefresh();
+
+const onSuccess = () => {
+    notify('Donación actualizada correctamente'); // Mensaje de éxito
+    redirect('/donations'); // Redirige a la lista de donaciones
+    refresh(); // Refresca la vista
+};
     return (
-    <Edit onFailure={handleFailure}>
+    <Edit mutationOptions= {{ onSuccess }}>
         <SimpleForm>
             <TextInput source="nombre" />
             <TextInput source="apellido" />
@@ -60,8 +59,17 @@ export const DonorEdit = () => {
 }
 
 export const DonorCreate = () => {
+    const redirect = useRedirect();
+const notify = useNotify();
+const refresh = useRefresh();
+
+const onSuccess = () => {
+    notify('Donación actualizada correctamente'); // Mensaje de éxito
+    redirect('/donations'); // Redirige a la lista de donaciones
+    refresh(); // Refresca la vista
+};
     return (
-    <Create >
+    <Create mutationOptions= {{ onSuccess }}>
         <SimpleForm>
             <TextInput source="nombre" />
             <TextInput source="apellido" />
