@@ -17,23 +17,24 @@ const transporter = nodemailer.createTransport({
 });
 
 
-const sendEmail = async (donorName: string, donationAmount: string, donationDate: string, contactEmail:string, organizationName:string, year:string) => {
+const sendEmail = async (donorName: string, donationAmount: string, donationDate: string, contactEmail: string, organizationName: string, year: string) => {
 
   const donation_email = `
 <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
   <div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; background-color: #f9f9f9;">
     
-    <div style="text-align: center; padding: 10px 0; background-color: #4CAF50; color: white;">
-      <h1>Confirmación de Donación</h1>
+    <div style="display: flex; align-items: center; padding: 10px 0; background-color: #003366; color: white;"> <!-- Cambié el color aquí -->
+      <img src="https://pbs.twimg.com/profile_images/1562606977930432512/UiOSwS5F_400x400.jpg" alt="Logo" style="width: 100px; height: 100px; margin-right: 10px; margin-left: 10px;">
+      <h1 style="margin-left: 30;">Confirmación de Donación</h1>
     </div>
 
     <p>Estimado(a) ${donorName},</p>
 
-    <p>Nos complace confirmar que hemos recibido su donación de <strong>${parseFloat(donationAmount).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}</strong> el <strong>${new Date(donationDate).toLocaleString('es-ES', {year: 'numeric', month: 'long', day: 'numeric'})}</strong>.</p>
+    <p>Nos complace confirmar que hemos recibido su donación de <strong>${parseFloat(donationAmount).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}</strong> el <strong>${new Date(donationDate).toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</strong>.</p>
 
-    <p>Queremos expresarle nuestro más sincero agradecimiento por su generosidad y apoyo a nuestra causa. Su donación hará una gran diferencia en nuestra misión y en la vida de aquellos a quienes servimos.</p>
+    <p>Queremos expresarle nuestro más sincero agradecimiento por su generosidad y apoyo a nuestra causa. Su donación hará una gran diferencia en nuestra misión y en la vida de muchas familias.</p>
 
-    <p>Si necesita más información o desea recibir un recibo formal, no dude en ponerse en contacto con nosotros a través de ${contactEmail}.</p>
+    <p>Si requiere de más información, no dude en poner en contacto con nosotros a través de Sanders@gmail.com</p>
 
     <p>Una vez más, le agradecemos su valiosa contribución.</p>
 
@@ -45,7 +46,9 @@ const sendEmail = async (donorName: string, donationAmount: string, donationDate
       <p>&copy; ${year} ${organizationName}. Todos los derechos reservados.</p>
     </div>
   </div>
-</body>`
+</body>`;
+
+
 
   try {
       await transporter.sendMail(
@@ -174,7 +177,7 @@ router.post('/', async (req: Request, res: Response) => {
     if (createdDonation) {
       const { _id, nombre, apellido, email, monto, createdAt, ...donationWithoutId } = createdDonation;
 
-      sendEmail(nombre+""+apellido, monto, createdAt, email, "Sanders", "2024");
+      sendEmail(nombre+" "+apellido, monto, createdAt, email, "Fundación Sanders", "2024");
 
       res.status(201).json({ id: _id, ...donationWithoutId });
     } else {
