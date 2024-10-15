@@ -1,0 +1,33 @@
+.widget {
+    padding: 10px;
+    border-radius: 50px;
+    background-color: #dfeeef; /* Color de fondo suave */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+  }
+  
+  .widget:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el cursor */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+  }
+  
+  .widget-title {
+    color: var(--our-dark-blue);
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700; /* Peso de fuente para el título */
+    margin-bottom: 15px; /* Espaciado inferior */
+  }
+  
+  .widget-value {
+    color: var(--our-pink);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 24px; /* Tamaño de fuente para el valor */
+    font-weight: 600; /* Peso de fuente para el valor */
+  }
+  
+  .widget-description {
+    color: #555; /* Color gris para descripciones */
+    font-family: 'Nunito Sans', sans-serif;
+    margin-top: 10px; /* Espaciado superior para la descripción */
+  }
+  

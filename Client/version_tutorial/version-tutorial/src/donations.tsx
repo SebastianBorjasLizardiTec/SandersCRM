@@ -82,7 +82,11 @@ export const DonationCreate = () => {
                     { id: 'Mensual', name: 'Mensual' },
                     { id: 'Anual', name: 'Anual' }
                 ]} />
-                <TextInput source="campana" label="Campaña" />
+                <SelectInput source="campana" label="Campaña" choices={[
+                    { id: 'Agua', name: 'Agua' },
+                    { id: 'Nutricion', name: 'Nutrición' },
+                    { id: 'Otra', name: 'Otra' }
+                ]} />
                 <TextInput source="estado" label="Estado" />
             </SimpleForm>
         </Create>

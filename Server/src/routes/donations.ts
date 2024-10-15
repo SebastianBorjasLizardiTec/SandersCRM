@@ -14,7 +14,7 @@ const donationSchema = new mongoose.Schema({
   moneda: { type: String, required: true },
   metodoPago: { type: String, required: true },
   frecuencia: { type: String, required: true }, // Única, mensual, etc.
-  campana: { type: String },  // Proyecto o campaña a la que se destinó la donación
+  campana: { type: String, required: true },  // Proyecto o campaña a la que se destinó la donación
   comentarios: { type: String },  // Comentarios del donante, si los hay
   estado: { type: String},  // Confirmada, Pendiente, etc.
   createdAt: { type: Date, default: Date.now },
@@ -40,7 +40,7 @@ router.get('/', async (req: Request, res: Response) => {
       moneda: donation.moneda,
       metodoPago: donation.metodoPago,
       frecuencia: donation.frecuencia,
-      campana: donation.campaña,
+      campana: donation.campana,
       comentarios: donation.comentarios,
       estado: donation.estado,
     }));
