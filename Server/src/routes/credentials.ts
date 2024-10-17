@@ -73,7 +73,7 @@ router.post('/signup', async (req: Request, res: Response) => {
             nombre,
             email,
             password: hashedPassword,
-            role: role || "Basic" // Set role to "Basic" only if not specified
+            role: role || "Basic"
         };
 
         console.log('New user data:', newUser);

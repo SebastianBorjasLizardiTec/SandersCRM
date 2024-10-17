@@ -32,7 +32,7 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) 
 export const App = () => {
   const userRole = localStorage.getItem('userRole');
   const isAdmin = userRole === 'admin';
-  const isBasic = userRole === 'basic';
+  const isBasic = userRole === 'basic' || userRole === "Basic";
 
   return (
     <Router>
