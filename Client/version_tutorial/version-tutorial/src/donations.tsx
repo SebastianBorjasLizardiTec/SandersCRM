@@ -19,7 +19,7 @@ import { useMediaQuery, Theme } from "@mui/material";
 export const DonationList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
     const userRole = localStorage.getItem('userRole');
-    const canEdit = userRole !== 'basic';
+    const canEdit = userRole === 'admin' || userRole === 'accountManager';
 
     return (
         <List actions={canEdit ? undefined : false} sx={{ backgroundColor: '#e0e0e0' }}>

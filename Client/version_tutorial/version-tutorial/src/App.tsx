@@ -4,7 +4,7 @@ import {
   ListGuesser,
   EditGuesser,
   ShowGuesser,
-  Create, // or CreateBase
+  Create, 
 } from "react-admin";
 import { menuLayout } from "./MenuLayout";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';

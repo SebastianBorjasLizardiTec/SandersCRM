@@ -1,6 +1,6 @@
 import { fetchUtils, DataProvider } from 'react-admin';
 import { stringify } from 'query-string';
-//import { API_URL } from '../constants/constants';
+
 
 const httpClient = fetchUtils.fetchJson;
 const API_URL = 'http://localhost:5000';
