@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
-    "chart.js": "^4.4.4",
+    "chart.js": "^4.4.5",
     "ra-data-json-server": "^5.2.3",
     "ra-i18n-polyglot": "^5.2.3",
     "ra-language-spanish": "^1.0.0",
